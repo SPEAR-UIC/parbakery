@@ -1,0 +1,10 @@
+# 09 — data structure, zero-argument. The other fast baseline: no column
+# roles, so it runs with or without a profile. Separate from 01 only
+# because AIDRIN files these under its own category, data-structure.
+file-path: /path/to/data.csv
+metrics:
+  - constant-feature-count
+  - max-pairwise-correlation
+  - skewness
+  - kurtosis
+save-images: false

@@ -1,0 +1,10 @@
+# 06 — governance, risk scores. Both scan the same columns for unique values,
+# one per row (single-attribute) and one per pair (multiple-attribute). The
+# Markov model over pairs is the slowest metric AIDRIN has on wide tables.
+file-path: /path/to/data.csv
+metrics:
+  - single-attribute-risk
+  - multiple-attribute-risk
+id-column: fnlwgt
+eval-columns: [age, occupation, education_num]
+save-images: false

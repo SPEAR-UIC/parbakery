@@ -1,0 +1,10 @@
+# 08 — privacy, differential privacy. This is the one AIDRIN metric that also
+# WRITES a file: a noisy copy at ./noisy/noisy_data.csv, relative to the cwd.
+# Run it from a scratch directory (Enrich does, per file). The Laplace
+# mechanism adds real noise, so keep the column list short — it is slow.
+file-path: /path/to/data.csv
+metrics:
+  - differential-privacy
+columns: [age, hours_per_week]
+epsilon: 1.0
+save-images: false

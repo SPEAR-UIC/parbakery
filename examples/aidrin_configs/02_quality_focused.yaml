@@ -1,0 +1,22 @@
+# 02 — data quality, with declared columns. Delete the metrics (and keys) your
+# file has no role for; each metric ignores keys it does not use.
+file-path: /path/to/data.csv
+metrics:
+  - row-level-completeness
+  - duplicity-by-features
+  - feature-coverage-ratio
+  - temporal-completeness
+  - null-count-trend
+  - file-reference-validation
+  - variable-unit-validation
+required-columns: [education_num, age]
+duplicate-columns: [workclass, occupation]
+threshold: 0.9
+timestamp-column: event_time
+frequency: D
+batch-column: machine_id
+target-columns: [temperature, pressure]
+path-targets: [path, image_path]
+base-dir: /data/project
+unit-metadata-file: /path/to/data.units.json
+save-images: false

@@ -1,0 +1,13 @@
+# 04 — fairness and balance. statistical-rates compares y-true against the
+# sensitive attribute; class-imbalance measures the target's classes.
+file-path: /path/to/data.csv
+metrics:
+  - class-imbalance
+  - statistical-rates
+  - representation-rate
+target-column: income
+y-true-column: income
+sensitive-attribute-column: sex
+distance-metric: jensen_shannon
+columns: [sex, race]
+save-images: false

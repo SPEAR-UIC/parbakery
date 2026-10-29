@@ -1,0 +1,53 @@
+# enrich_maximal.yaml — every role Enrich knows, for the four areas AIDRIN covers:
+# data quality, impact of data on AI, fairness and balance, governance and privacy.
+#
+#   python3 parbakery.py DIR --out OUT --enrich --enrich-profile this-file.yaml
+#
+# Column names are the example dataset's (like AIDRIN's adult.csv). Replace them
+# with your own; delete a role (or its line) to trim the metrics that need it.
+# Enrich writes one AIDRIN batch config per argument group — the config is flat,
+# so two metrics wanting the same key for different columns cannot share it.
+#
+# THIS IS THE MAXIMAL SET. It will take a long time on a real file:
+# k-anonymity, the risk scores and differential privacy are the slow ones.
+# Trim by deleting roles, or list the groups you want under "groups:" below.
+
+roles:
+  # --- data quality ---
+  required_columns: [education_num, age]      # row-level-completeness
+  duplicate_columns: [workclass, occupation]  # duplicity-by-features
+  threshold: 0.9                             # feature-coverage-ratio
+  timestamp_column: null                     # temporal-completeness — set for time series
+  frequency: D                               # ms s min h D W ME QE YE
+  batch_column: null                         # null-count-trend — set for batched data
+  target_columns: []                         # null-count-trend (default: every other column)
+  path_targets: []                           # file-reference-validation — manifest columns
+  base_dir: null                             # where relative references resolve
+  unit_metadata_file: null                   # variable-unit-validation sidecar
+
+  # --- impact of data on AI ---
+  # feature-relevance needs its categorical/numerical columns to be a subset
+  # of correlation_columns, so correlation_columns is the full analysis set.
+  correlation_columns: [workclass, education, marital.status, occupation, sex,
+                        age, education_num, capital.gain, capital.loss,
+                        hours.per.week]
+  target_column: income                      # feature-relevance, class-imbalance, statistical-rates
+  categorical_columns: [workclass, education, marital.status, occupation]
+  numerical_columns: [age, education_num, capital.gain, capital.loss, hours.per.week]
+
+  # --- fairness and balance ---
+  distance_metric: jensen_shannon            # class-imbalance (optional)
+  sensitive_attribute_column: sex            # statistical-rates
+  representation_columns: [sex, race]        # representation-rate
+
+  # --- governance and privacy ---
+  quasi_identifiers: [age, sex, race]        # k-anonymity, entropy-risk, l-diversity, t-closeness
+  sensitive_column: income                   # l-diversity, t-closeness
+  id_column: fnlwgt                          # single/multiple-attribute-risk — a row identifier
+  risk_columns: [age, occupation]            # eval columns for the Markov risk scores
+  hipaa_columns: [workclass, education]      # hipaa-compliance PHI pattern scan
+  dp_columns: [age, hours_per_week]          # differential-privacy — numeric, few; it is slow
+  epsilon: 1.0                               # privacy budget: smaller = more noise
+
+# Uncomment to run only some groups (names are the keys in enrich.py GROUPS):
+# groups: [quality_baseline, quality_focused, impact, fairness]

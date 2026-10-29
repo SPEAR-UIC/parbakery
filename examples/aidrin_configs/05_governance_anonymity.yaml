@@ -1,0 +1,12 @@
+# 05 — governance, anonymity. The slow group: k-anonymity and entropy-risk
+# want only quasi-identifiers; l-diversity and t-closeness add a sensitive
+# column. The extra key is ignored by the first two, so all four coexist.
+file-path: /path/to/data.csv
+metrics:
+  - k-anonymity
+  - entropy-risk
+  - l-diversity
+  - t-closeness
+quasi-identifiers: [age, sex, race]
+sensitive-column: income
+save-images: false

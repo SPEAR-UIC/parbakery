@@ -1,0 +1,26 @@
+# Flags for parbakery.py, read with an @ in front of the file name.
+# Run from the parbake directory:
+#
+#     python3 parbakery.py @examples/practice.args
+#     python3 parbakery.py @examples/practice.args --preview 50    # later flags win
+#
+# One flag per line, or a flag and its value together. Put a value with spaces
+# in quotes. A # starts a comment. $VARIABLES and ~ are NOT expanded -- write
+# the path out in full. Relative paths are relative to where you run from.
+
+# What to scan. Can also go on the command line instead.
+../copies_of_data
+
+# A small read, so the practice run is quick.
+--preview 2000
+--workers 2
+
+# Kept apart from real output.
+--out practice_output
+
+# --- for a real run on Lustre: delete --preview above and uncomment these ---
+# --full
+# --batch-local-copies
+# --local-copy-dir /local/scratch/mseryn
+# --workers 32
+# --skip-existing

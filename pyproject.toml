@@ -1,0 +1,11 @@
+[project]
+name = "parbake"
+version = "0.1.0"
+description = "Documents directories of HPC data files."
+requires-python = ">=3.8"
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "parsing_tools/tests"]
+# Modules are imported by name from the repository root.
+pythonpath = ["."]
+python_files = ["test_*.py"]

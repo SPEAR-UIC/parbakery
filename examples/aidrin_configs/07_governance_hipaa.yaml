@@ -1,0 +1,8 @@
+# 07 — governance, HIPAA. A pattern scan: 18 PHI categories (names, dates,
+# SSNs, MRNs, ...), not a column-role metric. It wants "columns"; because that
+# key means something different here than in 03/04/08, it needs its own file.
+file-path: /path/to/data.csv
+metrics:
+  - hipaa-compliance
+columns: [workclass, education, age, sex]
+save-images: false

@@ -1,0 +1,13 @@
+# 03 — impact of data on AI. correlations' "columns" and feature-relevance's
+# cat/numerical columns are different keys, so they share a config safely —
+# but AIDRIN requires the cat/numerical columns to be a subset of "columns".
+file-path: /path/to/data.csv
+metrics:
+  - correlations
+  - feature-relevance
+columns: [workclass, education, marital.status, occupation, sex, age,
+          education_num, capital.gain, capital.loss, hours.per.week]
+target-column: income
+categorical-columns: [workclass, education, marital.status, occupation]
+numerical-columns: [age, education_num, capital.gain, capital.loss, hours.per.week]
+save-images: false

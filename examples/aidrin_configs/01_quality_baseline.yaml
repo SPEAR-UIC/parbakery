@@ -1,0 +1,7 @@
+# 01 — data quality, zero-argument. The fast baseline; runs with no profile.
+file-path: /path/to/data.csv
+metrics:
+  - completeness
+  - duplicity
+  - outliers
+save-images: false
